@@ -1,11 +1,13 @@
-'use strict';
-
 const fs      = require('fs');
 const jsdom   = require('jsdom');
 const d3      = require('d3');
 const svg2png = require('svg2png');
 
-const body = new jsdom.JSDOM().window.document.body;
+const config = fs.readFileSync('config.json');
+const { colors, percents } = JSON.parse(config);
+
+const dom  = new jsdom.JSDOM();
+const body = dom.window.document.body;
 
 const length = 10;
 const radius = 30;
@@ -13,25 +15,12 @@ const offset =  5;
 
 const canvasW  = (length * (radius * 2)) + (length * offset) + offset;
 const canvasH  = (radius * 2) + (offset * 2);
-const canvasVB = '0 0 ' + canvasW + ' ' + canvasH;
+const canvasVB = `0 0 ${canvasW} ${canvasH}`;
 
 const cy = radius + offset;
 
 const pngRatio = 2;
 const pngArgs  = { width: canvasW * pngRatio };
-
-const colors = {
-  sorbus:   '#E96A3C',
-  laurel:   '#70926C',
-  maitai:   '#A96738',
-  creamcan: '#F7C264'
-};
-
-const percents = [
-  26.19, 11.9, 14.28, 21.42, 2.38, 7.14,
-  4.76, 73.8, 59.52, 19.04, 47.61, 9.52,
-  28.57, 30.95, 23.8, 57.14, 16.66, 35.71
-];
 
 function circleX(radius, offset, index) {
   return (radius * index) + (radius * (index - 1)) + (offset * index);
@@ -82,7 +71,7 @@ Object.keys(colors).forEach((color) => {
     body.innerHTML = '';
 
     svg2png(buffer, pngArgs).then((png) => {
-      fs.writeFile('dist/' + fileName(color, percent), png, (err) => {
+      fs.writeFile(`dist/${fileName(color, percent)}`, png, (err) => {
         if (err) throw err;
         console.log('Success!', color, percent);
       });

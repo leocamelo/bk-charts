@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "node main.js"
+  },
   "dependencies": {
     "d3": "^4.11.0",
     "jsdom": "^11.3.0",
