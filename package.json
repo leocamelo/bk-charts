@@ -3,7 +3,7 @@
     "start": "node main.js"
   },
   "dependencies": {
-    "d3": "^5.9.7",
+    "d3": "^5.11.0",
     "jsdom": "^15.1.1",
     "svg2png": "^4.1.1"
   }
