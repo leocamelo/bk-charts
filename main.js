@@ -40,7 +40,7 @@ function fileName(color, ratio) {
   return color + '_' + ratio.toString().replace('.', '-') + '.png';
 }
 
-Object.keys(colors).forEach((color) => {
+Object.entries(colors).forEach(([color, hex]) => {
   percents.forEach((percent) => {
     let svg = d3.select(body)
                 .append('svg')
@@ -51,20 +51,19 @@ Object.keys(colors).forEach((color) => {
 
     for (let index = 1; index <= length; index++) {
       let cx = circleX(radius, offset, index);
-      let colorHex = colors[color];
 
       svg.append('circle')
          .attr('r', radius)
          .attr('cx', cx)
          .attr('cy', cy)
          .attr('fill', 'none')
-         .attr('stroke', colorHex);
+         .attr('stroke', hex);
 
       svg.append('circle')
          .attr('r', circleRadius(radius, circleRatio(length, index, percent)))
          .attr('cx', cx)
          .attr('cy', cy)
-         .attr('fill', colorHex);
+         .attr('fill', hex);
     }
 
     let buffer = Buffer.from(body.innerHTML);
