@@ -3,8 +3,8 @@
     "start": "node main.js"
   },
   "dependencies": {
-    "d3": "^5.15.0",
-    "jsdom": "^16.2.1",
+    "d3": "^5.15.1",
+    "jsdom": "^16.2.2",
     "svg2png": "^4.1.1"
   }
 }
