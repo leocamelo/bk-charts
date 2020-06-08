@@ -2,6 +2,8 @@
 
 Pretty circle charts with Node.js
 
+![Example](https://raw.githubusercontent.com/leocamelo/bk-charts/master/example.png)
+
 ## Running
 
 ```bash
